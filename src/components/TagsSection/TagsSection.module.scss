@@ -1,0 +1,12 @@
+@import '../../styles/abstract/abstracts';
+
+.tagsSection {
+  width: 30%;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+
+  background-color: $color-background-view;
+
+  border: $border;
+  border-radius: $radius-border-view;
+}

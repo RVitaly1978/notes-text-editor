@@ -1,9 +1,10 @@
 @import '../../styles/abstract/abstracts';
 
 .main {
-  padding: 0.5rem;
+  padding: 0.5rem 0;
 
   flex-grow: 1;
+  @include flex($align-items: stretch, $justify-content: flex-start);
 
   @extend %animation-fadeIn;
 }

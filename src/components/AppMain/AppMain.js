@@ -1,10 +1,13 @@
+import NotesSection from '../NotesSection/NotesSection';
+import TagsSection from '../TagsSection/TagsSection';
 import s from './AppMain.module.scss';
 
 const AppMain = () => {
   return (
-    <div className={s.main}>
-      AppMain
-    </div>
+    <main className={s.main}>
+      <TagsSection />
+      <NotesSection />
+    </main>
   );
 };
 
