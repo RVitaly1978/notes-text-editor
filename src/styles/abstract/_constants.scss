@@ -1,0 +1,60 @@
+// Color
+  $color-background: #dfd9d9;
+  $color-background-view: #cbcbcb;
+  $color-background-view-opacity: #cbcbcbcb;
+
+  $color-border-view: #1a1a1a;
+
+  $color-text: #2b2b2b;
+  $color-text-marked: #1a1a1a;
+
+  $color-link: #8b8b8b;
+  $color-link-hover: #1a1a1a;
+
+  $color-background-dialog: #1a1a1afa;
+  $color-text-dialog: #f0f0f0e1;
+
+  $color-shadow: rgba(0, 0, 0, 0.3);
+  $color-shadow-light: rgba(0, 0, 0, 0.1);
+
+// Content width
+  $content-width-wide: 1440px;
+  $content-width-laptop: 1280px;
+  $content-width-tablet: 1024px;
+  $content-width-landscape: 830px;
+  $content-width-surface: 550px;
+  $content-width-mobile: 420px;
+  $content-width-min: 310px;
+
+  $content-hight-tabletHight: 767px;
+
+  $padding-wide: 3.5rem;
+  $padding-laptop: 3.0rem;
+  $padding-tablet: 2.5rem;
+  $padding-landscape: 2.0rem;
+  $padding-surface: 1.5rem;
+  $padding-mobile: 1.0rem;
+
+// dimensions
+  $header-hight: 5rem;
+  $header-hight-surface: 7rem;
+  $footer-hight: 4rem;
+
+  // Tooltips
+  $font-size-tooltips: 1.2rem;
+  $color-background-tooltip: $color-background-dialog;
+  $color-tooltip: $color-text-dialog;
+  $z-tooltips: 10000;
+  $radius-border-tooltips: 4px;
+  $box-shadow-tooltips: 0 0 2px 1px $color-background-tooltip;
+
+  // Border
+  $border: 1px solid $color-border-view;
+  $border-light: 1px solid $color-background;
+  $box-shadow: 0px 0px 3px 1px $color-border-view;
+  $box-shadow-dialog: 0px 0px 2px 1px $color-background-dialog;
+  $box-shadow-flag: 2px 2px 4px 1px $color-border-view;
+  $text-shadow: 1px 1px 2px $color-text;
+
+  $btn-border-radius: 2px;
+  $radius-border-view: 4px;
