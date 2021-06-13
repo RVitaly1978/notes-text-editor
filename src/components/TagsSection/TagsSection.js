@@ -1,9 +1,12 @@
+import TagSearcher from '../TagSearcher/TagSearcher';
+import TagsList from '../TagsList/TagsList';
 import s from './TagsSection.module.scss';
 
 const TagsSection = () => {
   return (
     <section className={s.tagsSection}>
-      TagsSection
+      <TagSearcher />
+      <TagsList />
     </section>
   );
 };
