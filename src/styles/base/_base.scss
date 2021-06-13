@@ -1,0 +1,168 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  position: relative;
+  box-sizing: border-box;
+
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  background-color: $color-background;
+
+  @extend %font-default;
+  @include font ($size: 1.6rem, $height: 1, $weight: 500);
+  color: $color-text;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @extend %transition-background;
+
+  @include media-landscape {
+    // padding-top: $header-hight;
+
+    font-size: 1.5rem;
+
+    @include media-tabletHight {
+      // padding-top: 0;
+    }
+  }
+
+  // @include media-surface {
+  //   padding-top: $header-hight-surface;
+  // }
+
+  @include media-min {
+    font-size: 1.2rem;
+  }
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+:focus {
+  outline: none;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+
+  color: inherit;
+  @include font ($size: 2.8rem, $height: 1, $weight: 900);
+  text-align: left;
+
+  @include media-landscape {
+    font-size: 2.5rem;
+  }
+
+  @include media-min {
+    font-size: 2.2rem;
+  }
+}
+
+h2, h3 {
+  margin: 0;
+  padding: 0;
+
+  @include font ($size: 2.0rem, $height: 1, $weight: 700);
+  color: inherit;
+  text-align: left;
+
+  @include media-landscape {
+    font-size: 1.8rem;
+  }
+
+  @include media-min {
+    font-size: 1.5rem;
+  }
+}
+
+div, p {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+button, a {
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  background-color: inherit;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  font: inherit;
+  color: inherit;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+button {
+  padding: 1rem 2rem;
+
+  background-color: $color-background-view-opacity;
+  border-radius: $btn-border-radius;
+  color: firebrick;
+
+  @extend %transition-hover;
+
+  @include media-hover {
+    &:hover {
+      background-color: $color-link;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: none;
+    pointer-events: none;
+  }
+}
+
+input {
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  background-color: inherit;
+
+  font: inherit;
+  color: inherit;
+}
+
+table {
+  border-spacing: 0;
+}
+
+:fullscreen::backdrop {
+  margin: 0.1rem !important;
+  padding: 0.5rem;
+
+  background-color: $color-background;
+  border: $border;
+  border-radius: $radius-border-view;
+}
