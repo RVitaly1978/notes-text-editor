@@ -1,0 +1,8 @@
+@import '../../styles/abstract/abstracts';
+
+.container {
+  background-color: $color-background-view;
+
+  border: $border;
+  border-radius: $radius-border-view;
+}
