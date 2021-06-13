@@ -1,0 +1,44 @@
+@import '../../styles/abstract/abstracts';
+
+.footer {
+  position: relative;
+
+  width: 100%;
+  height: $footer-hight;
+  padding: 0.5rem 2rem;
+
+  @include flex($justify-content: space-between);
+
+  background-color: $color-background-view;
+
+  border: $border;
+  border-radius: $radius-border-view;
+
+  user-select: none;
+
+  @include media-surface {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.footer_link {
+  @include flex();
+
+  color: $color-link;
+
+  text-decoration: none;
+
+  @extend %transition-hover;
+
+  @include media-hover {
+    &:hover {
+      color: $color-link-hover;
+      outline: none;
+    }
+  }
+}
+
+.footer_icon__github {
+  @include size(3rem);
+}
