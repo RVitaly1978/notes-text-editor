@@ -1,10 +1,10 @@
-import NoteEditor from '../NoteEditor/NoteEditor';
+import NoteCreator from '../NoteCreator/NoteCreator';
 import s from './Note.module.scss';
 
 const Note = () => {
   return (
     <div className={s.container}>
-      <NoteEditor />
+      <NoteCreator />
     </div>
   );
 };
