@@ -1,8 +1,8 @@
 import NotesSection from '../NotesSection/NotesSection';
 import TagsSection from '../TagsSection/TagsSection';
-import s from './AppMain.module.scss';
+import s from './Main.module.scss';
 
-const AppMain = () => {
+const Main = () => {
   return (
     <main className={s.main}>
       <TagsSection />
@@ -11,4 +11,4 @@ const AppMain = () => {
   );
 };
 
-export default AppMain;
+export default Main;
