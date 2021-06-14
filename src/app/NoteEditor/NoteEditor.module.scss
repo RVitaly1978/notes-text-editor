@@ -1,0 +1,10 @@
+@import '../../styles/abstract/abstracts';
+
+.container {
+  margin: 2rem;
+
+  background-color: $color-background-view;
+
+  border: $border;
+  border-radius: $radius-border-view;
+}

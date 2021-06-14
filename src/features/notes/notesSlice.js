@@ -1,9 +1,14 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createEntityAdapter,
+  createSlice,
+} from '@reduxjs/toolkit';
+import { v4 as uuid } from 'uuid';
 
 export const name = 'notes';
 
 const notesAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.id.localeCompare(b.id),
+  sortComparer: (a, b) => a.editAt.localeCompare(b.editAt),
 });
 
 const initialState = {};
@@ -16,6 +21,26 @@ const notesSlice = createSlice({
   },
   extraReducers: {},
 });
+
+export const {
+  noteAdded,
+} = notesSlice.actions;
+
+export const noteAdd = createAction(
+  noteAdded.toString(),
+  ({ text, tags }) => {
+    const date = new Date().toISOString();
+    return {
+      payload: {
+        text,
+        id: uuid(),
+        createdAt: date,
+        editAt: date,
+        tags,
+      },
+    };
+  }
+);
 
 export const {
   selectAll: selectAllNotes,
