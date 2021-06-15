@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { noteAdd } from '../../features/notes/notesSlice';
+import { addNote } from '../../features/notes/notesSlice';
 import s from './NoteCreator.module.scss';
 
 const NoteCreator = () => {
   const dispatch = useDispatch();
+  const ref = useRef(null);
   const [note, setNote] = useState('');
 
-  const handleClick = () => {
-    dispatch(noteAdd({ text: note, tags: [] }));
+  const handleCreate = () => {
+    if (!note) {
+      return;
+    }
+
+    dispatch(addNote({ text: note, tags: [] }));
     setNote('');
+  };
+
+  const handleClear = () => {
+    setNote('');
+    ref.current.focus();
   };
 
   const handleChange = (e) => {
@@ -20,13 +30,18 @@ const NoteCreator = () => {
   return (
     <div className={s.container}>
       <textarea
+        ref={ref}
         onChange={handleChange}
         value={note}
       />
 
       <button
-        onClick={handleClick}
-      >Save</button>
+        onClick={handleClear}
+      >Clear</button>
+
+      <button
+        onClick={handleCreate}
+      >Create</button>
     </div>
   );
 };
