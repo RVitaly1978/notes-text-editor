@@ -20,6 +20,8 @@ const notesSlice = createSlice({
   initialState: notesAdapter.getInitialState(initialState),
   reducers: {
     noteAdded: notesAdapter.addOne,
+    noteDeleted: notesAdapter.removeOne,
+    noteUpdated: notesAdapter.upsertOne,
     currentSet: (state, action) => {
       state.current = action.payload;
     },
@@ -29,10 +31,12 @@ const notesSlice = createSlice({
 
 export const {
   noteAdded,
+  noteDeleted,
+  noteUpdated,
   currentSet,
 } = notesSlice.actions;
 
-export const noteAdd = createAction(
+export const addNote = createAction(
   noteAdded.toString(),
   ({ text, tags }) => {
     const date = new Date().toISOString();
@@ -43,9 +47,21 @@ export const noteAdd = createAction(
         createdAt: date,
         editAt: date,
         tags,
+        isEditMode: false,
+        isViewMode: false,
       },
     };
   }
+);
+
+export const updateNote = createAction(
+  noteUpdated.toString(),
+  (note) => ({ payload: note })
+);
+
+export const deleteNote = createAction(
+  noteDeleted.toString(),
+  ({ id }) => ({ payload: id })
 );
 
 export const setCurrentNote = createAction(
