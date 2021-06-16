@@ -1,52 +1,73 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import clsx from 'clsx';
+import ContentEditable from 'react-contenteditable';
 import { updateNote, selectNoteById } from '../../features/notes/notesSlice';
 import s from './NoteEditMode.module.scss';
 
-const NoteEditMode = ({ id }) => {
+const NoteEditMode = ({ id, getFocus }) => {
   const dispatch = useDispatch();
-  const [noteText, setNoteText] = useState('');
   const note = useSelector((state) => selectNoteById(state, id));
+  const contentEditable  = useRef('');
+  const contentRef = useRef('');
 
-  const { text } = note;
+  const { content, isEditMode, isViewMode } = note;
+
   useEffect(() => {
-    setNoteText(text);
-  }, [text]);
+    contentRef.current = content;
+    contentEditable.current.innerHTML = content;
+  }, [content]);
 
   const handleCancel = () => {
+    getFocus();
+
+    contentRef.current = content;
+    contentEditable.current.innerHTML = content;
     dispatch(updateNote({ id, isEditMode: false }));
   };
 
   const handleSave = () => {
-    if (noteText === text) { // -----------------------------------------------
+    getFocus();
+
+    if (contentRef.current === content) {
       dispatch(updateNote({ id, isEditMode: false }));
       return;
     }
 
-    dispatch(updateNote({ id, text: noteText, isEditMode: false }));
+    dispatch(updateNote({ id, content: contentRef.current, isEditMode: false }));
   };
 
   const handleChange = (e) => {
-    const { innerHTML } = e.target;
-    setNoteText(innerHTML);
+    const { value } = e.target;
+    contentRef.current = value;
   };
 
   return (
-    <div className={s.container}>
-      <div
-        contentEditable={note.isEditMode}
-        onInput={handleChange}
-        dangerouslySetInnerHTML={{ __html: noteText }}
-        suppressContentEditableWarning={true}
-      />
+    <div>
+      <div className={clsx(
+        s.container,
+        isViewMode && s.viewMode,
+        isEditMode && s.editMode,
+      )}>
+        <ContentEditable
+          disabled={!isEditMode}
+          innerRef={contentEditable}
+          onChange={handleChange}
+          html={contentRef.current}
+        />
+      </div>
 
-      <button
-        onClick={handleCancel}
-      >Cancel</button>
+      {isEditMode && (
+        <button
+          onClick={handleCancel}
+        >Cancel</button>
+      )}
 
-      <button
-        onClick={handleSave}
-      >Save</button>
+      {isEditMode && (
+        <button
+          onClick={handleSave}
+        >Save</button>
+      )}
     </div>
   );
 };

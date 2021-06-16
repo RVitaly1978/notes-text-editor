@@ -38,11 +38,11 @@ export const {
 
 export const addNote = createAction(
   noteAdded.toString(),
-  ({ text, tags }) => {
+  ({ content, tags }) => {
     const date = new Date().toISOString();
     return {
       payload: {
-        text,
+        content,
         id: uuid(),
         createdAt: date,
         editAt: date,
@@ -56,7 +56,12 @@ export const addNote = createAction(
 
 export const updateNote = createAction(
   noteUpdated.toString(),
-  (note) => ({ payload: note })
+  (note) => {
+    if (note.content) {
+      note.editAt = new Date().toISOString();
+    }
+    return { payload: note };
+  }
 );
 
 export const deleteNote = createAction(
