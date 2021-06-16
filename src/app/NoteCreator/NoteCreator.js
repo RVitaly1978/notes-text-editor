@@ -1,38 +1,41 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import ContentEditable from 'react-contenteditable';
 import { addNote } from '../../features/notes/notesSlice';
 import s from './NoteCreator.module.scss';
 
 const NoteCreator = () => {
   const dispatch = useDispatch();
-  const ref = useRef(null);
-  const [note, setNote] = useState('');
+  const contentEditable  = useRef('');
+  const contentRef = useRef('');
 
   const handleCreate = () => {
-    if (!note) {
+    if (!contentRef.current) {
       return;
     }
 
-    dispatch(addNote({ text: note, tags: [] }));
-    setNote('');
+    dispatch(addNote({ content: contentRef.current, tags: [] }));
+    contentRef.current = '';
+    contentEditable.current.innerHTML = '';
   };
 
   const handleClear = () => {
-    setNote('');
-    ref.current.focus();
+    contentRef.current = '';
+    contentEditable.current.innerHTML = '';
+    contentEditable.current.focus();
   };
 
   const handleChange = (e) => {
     const { value } = e.target;
-    setNote(value);
+    contentRef.current = value;
   };
 
   return (
     <div className={s.container}>
-      <textarea
-        ref={ref}
+      <ContentEditable
+        innerRef={contentEditable}
         onChange={handleChange}
-        value={note}
+        html={contentRef.current}
       />
 
       <button

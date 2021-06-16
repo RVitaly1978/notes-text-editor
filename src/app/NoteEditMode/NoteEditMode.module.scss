@@ -9,3 +9,13 @@
   border: $border;
   border-radius: $radius-border-view;
 }
+
+.viewMode {
+  min-height: 5rem;
+  background-color: orange;
+}
+
+.editMode {
+  @extend .viewMode;
+  border-color: red;
+}
