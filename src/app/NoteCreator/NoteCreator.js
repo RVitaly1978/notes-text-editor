@@ -1,41 +1,43 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ContentEditable from 'react-contenteditable';
 import { addNote } from '../../features/notes/notesSlice';
+import { markTags, unmarkTags } from '../../helpers/markTags';
 import s from './NoteCreator.module.scss';
 
 const NoteCreator = () => {
   const dispatch = useDispatch();
   const contentEditable  = useRef('');
-  const contentRef = useRef('');
+  const [text, setText] = useState('');
 
   const handleCreate = () => {
-    if (!contentRef.current) {
+    if (!text) {
       return;
     }
 
-    dispatch(addNote({ content: contentRef.current, tags: [] }));
-    contentRef.current = '';
-    contentEditable.current.innerHTML = '';
+    dispatch(addNote({ content: text, tags: [] }));
+    setText('');
   };
 
   const handleClear = () => {
-    contentRef.current = '';
-    contentEditable.current.innerHTML = '';
     contentEditable.current.focus();
+    setText('');
   };
 
   const handleChange = (e) => {
     const { value } = e.target;
-    contentRef.current = value;
+    const unmarked = unmarkTags(value);
+    const marked = markTags(unmarked);
+    setText(marked);
   };
 
   return (
     <div className={s.container}>
       <ContentEditable
+        className={s.contentEditable}
         innerRef={contentEditable}
         onChange={handleChange}
-        html={contentRef.current}
+        html={text}
       />
 
       <button

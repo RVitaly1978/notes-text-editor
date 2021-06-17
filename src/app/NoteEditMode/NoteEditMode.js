@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import ContentEditable from 'react-contenteditable';
+import { markTags, unmarkTags } from '../../helpers/markTags';
 import { updateNote, selectNoteById } from '../../features/notes/notesSlice';
 import s from './NoteEditMode.module.scss';
 
@@ -9,37 +10,37 @@ const NoteEditMode = ({ id, getFocus }) => {
   const dispatch = useDispatch();
   const note = useSelector((state) => selectNoteById(state, id));
   const contentEditable  = useRef('');
-  const contentRef = useRef('');
+  const [text, setText] = useState('');
 
   const { content, isEditMode, isViewMode } = note;
 
   useEffect(() => {
-    contentRef.current = content;
-    contentEditable.current.innerHTML = content;
+    setText(content);
   }, [content]);
 
   const handleCancel = () => {
     getFocus();
 
-    contentRef.current = content;
-    contentEditable.current.innerHTML = content;
+    setText(content);
     dispatch(updateNote({ id, isEditMode: false }));
   };
 
   const handleSave = () => {
     getFocus();
 
-    if (contentRef.current === content) {
+    if (text === content) {
       dispatch(updateNote({ id, isEditMode: false }));
       return;
     }
 
-    dispatch(updateNote({ id, content: contentRef.current, isEditMode: false }));
+    dispatch(updateNote({ id, content: text, isEditMode: false }));
   };
 
   const handleChange = (e) => {
     const { value } = e.target;
-    contentRef.current = value;
+    const unmarked = unmarkTags(value);
+    const marked = markTags(unmarked);
+    setText(marked);
   };
 
   return (
@@ -50,10 +51,11 @@ const NoteEditMode = ({ id, getFocus }) => {
         isEditMode && s.editMode,
       )}>
         <ContentEditable
+          className={s.contentEditable}
           disabled={!isEditMode}
           innerRef={contentEditable}
           onChange={handleChange}
-          html={contentRef.current}
+          html={text}
         />
       </div>
 

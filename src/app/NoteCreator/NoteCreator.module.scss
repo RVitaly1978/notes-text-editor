@@ -8,3 +8,14 @@
   border: $border;
   border-radius: $radius-border-view;
 }
+
+.contentEditable {
+  width: 100%;
+  padding: 1rem;
+
+  background-color: rgb(230, 202, 230);
+
+  & span {
+    color: red;
+  }
+}

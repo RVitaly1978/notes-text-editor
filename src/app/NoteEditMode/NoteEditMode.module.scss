@@ -19,3 +19,13 @@
   @extend .viewMode;
   border-color: red;
 }
+
+.contentEditable {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(168, 168, 207);
+
+  & span {
+    color: blue;
+  }
+}
