@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ContentEditable from 'react-contenteditable';
-import { addNote } from '../../features/notes/notesSlice';
-import { markTags, unmarkTags } from '../../helpers/markTags';
+import { createNoteThunk } from '../../features/notes/notesSlice';
+import { markTagsInText } from '../../helpers/markTags';
 import s from './NoteCreator.module.scss';
 
 const NoteCreator = () => {
@@ -15,7 +15,7 @@ const NoteCreator = () => {
       return;
     }
 
-    dispatch(addNote({ content: text, tags: [] }));
+    dispatch(createNoteThunk(text));
     setText('');
   };
 
@@ -26,9 +26,7 @@ const NoteCreator = () => {
 
   const handleChange = (e) => {
     const { value } = e.target;
-    const unmarked = unmarkTags(value);
-    const marked = markTags(unmarked);
-    setText(marked);
+    setText(markTagsInText(value));
   };
 
   return (
