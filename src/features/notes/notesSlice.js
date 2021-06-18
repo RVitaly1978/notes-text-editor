@@ -3,6 +3,8 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
+import { addTagsThunk } from '../tags/tagsSlice';
+import { getMarkedTagsInText } from '../../helpers/markTags';
 import { v4 as uuid } from 'uuid';
 
 export const name = 'notes';
@@ -38,20 +40,17 @@ export const {
 
 export const addNote = createAction(
   noteAdded.toString(),
-  ({ content, tags }) => {
-    const date = new Date().toISOString();
-    return {
-      payload: {
-        content,
-        id: uuid(),
-        createdAt: date,
-        editAt: date,
-        tags,
-        isEditMode: false,
-        isViewMode: false,
-      },
-    };
-  }
+  ({ id, content, createdAt, tags }) => ({
+    payload: {
+      content,
+      id,
+      createdAt,
+      editAt: createdAt,
+      tags,
+      isEditMode: false,
+      isViewMode: false,
+    },
+  })
 );
 
 export const updateNote = createAction(
@@ -79,5 +78,19 @@ export const {
   selectAll: selectAllNotes,
   selectById: selectNoteById,
 } = notesAdapter.getSelectors((state) => state[name]);
+
+export const createNoteThunk = (note) => (dispatch) => {
+  const createdAt = new Date().toISOString();
+  const id = uuid();
+  let tags = getMarkedTagsInText(note);
+
+  if (!tags) {
+    dispatch(addNote({ content: note, createdAt, id, tags: [] }));
+    return;
+  }
+
+  const tagsIds = dispatch(addTagsThunk({ tags: [...new Set(tags)], noteId: id }));
+  dispatch(addNote({ content: note, createdAt, id, tags: tagsIds }));
+}
 
 export default notesSlice.reducer;
