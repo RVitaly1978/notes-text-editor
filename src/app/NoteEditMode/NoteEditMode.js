@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import ContentEditable from 'react-contenteditable';
-import { markTags, unmarkTags } from '../../helpers/markTags';
-import { updateNote, selectNoteById } from '../../features/notes/notesSlice';
+import { markTagsInText } from '../../helpers/markTags';
+import { updateNote, updateNoteThunk, selectNoteById } from '../../features/notes/notesSlice';
 import s from './NoteEditMode.module.scss';
 
 const NoteEditMode = ({ id, getFocus }) => {
@@ -20,7 +20,6 @@ const NoteEditMode = ({ id, getFocus }) => {
 
   const handleCancel = () => {
     getFocus();
-
     setText(content);
     dispatch(updateNote({ id, isEditMode: false }));
   };
@@ -33,14 +32,12 @@ const NoteEditMode = ({ id, getFocus }) => {
       return;
     }
 
-    dispatch(updateNote({ id, content: text, isEditMode: false }));
+    dispatch(updateNoteThunk({ id, content: text, isEditMode: false }));
   };
 
   const handleChange = (e) => {
     const { value } = e.target;
-    const unmarked = unmarkTags(value);
-    const marked = markTags(unmarked);
-    setText(marked);
+    setText(markTagsInText(value));
   };
 
   return (
