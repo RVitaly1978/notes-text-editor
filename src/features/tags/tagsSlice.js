@@ -4,6 +4,7 @@ import {
   createSelector,
   createSlice,
 } from '@reduxjs/toolkit';
+import { removeItemFromArray } from '../../helpers/removeItemFromArray';
 import { v4 as uuid } from 'uuid';
 
 export const name = 'tags';
@@ -81,10 +82,8 @@ export const selectTagByContent = createSelector(
 );
 
 export const addTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
-  const state = getState();
-
   const tagsIds = tags.map((content) => {
-    const tag = selectTagByContent(state, content);
+    const tag = selectTagByContent(getState(), content);
     if (!tag) {
       const id = uuid();
       dispatch(addTag({ id, content, notes: [noteId] }));
@@ -94,6 +93,37 @@ export const addTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
       return tag.id;
     }
   });
+  return tagsIds;
+}
+
+export const deleteTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
+  tags.forEach((id) => {
+    const tag = selectTagById(getState(), id);
+    const notes = removeItemFromArray(noteId, tag.notes);
+    if (!notes.length) {
+      dispatch(deleteTag({ id }));
+    } else {
+      dispatch(updateTag({ id, notes }));
+    }
+  });
+}
+
+export const compareTagsThunk = ({ tags, tagsContents, noteId }) => (dispatch, getState) => {
+  const tagsIds = [];
+  tagsContents.forEach((content) => {
+    let tag = selectTagByContent(getState(), content);
+    if (!tag) {
+      const id = uuid();
+      dispatch(addTag({ id, content, notes: [noteId] }));
+      tag = { id };
+    }
+    tagsIds.push(tag.id);
+  });
+
+  const removedTags = tags.filter((tag) => !tagsIds.includes(tag));
+  if (removedTags.length) {
+    dispatch(deleteTagsThunk({ tags: removedTags, noteId }));
+  }
 
   return tagsIds;
 }

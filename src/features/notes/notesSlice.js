@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
-import { addTagsThunk } from '../tags/tagsSlice';
+import { addTagsThunk, compareTagsThunk, deleteTagsThunk } from '../tags/tagsSlice';
 import { getMarkedTagsInText } from '../../helpers/markTags';
 import { v4 as uuid } from 'uuid';
 
@@ -84,13 +84,35 @@ export const createNoteThunk = (note) => (dispatch) => {
   const id = uuid();
   let tags = getMarkedTagsInText(note);
 
-  if (!tags) {
+  if (!tags.length) {
     dispatch(addNote({ content: note, createdAt, id, tags: [] }));
     return;
   }
 
   const tagsIds = dispatch(addTagsThunk({ tags: [...new Set(tags)], noteId: id }));
   dispatch(addNote({ content: note, createdAt, id, tags: tagsIds }));
+}
+
+export const updateNoteThunk = ({ id, content, isEditMode }) => (dispatch, getState) => {
+  const note = selectNoteById(getState(), id);
+  const tagsContents = getMarkedTagsInText(content);
+  let tags = [...note.tags];
+
+  if (tagsContents.length) {
+    tags = dispatch(compareTagsThunk({ tags, tagsContents, noteId: id }));
+  }
+
+  dispatch(updateNote({ id, content, isEditMode, tags }));
+}
+
+export const deleteNoteThunk = (id) => (dispatch, getState) => {
+  const { tags } = selectNoteById(getState(), id);
+
+  if (tags.length) {
+    dispatch(deleteTagsThunk({ tags, noteId: id }));
+  }
+
+  dispatch(deleteNote({ id }));
 }
 
 export default notesSlice.reducer;

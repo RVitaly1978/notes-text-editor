@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateNote, deleteNote } from '../../features/notes/notesSlice';
+import { updateNote, deleteNoteThunk } from '../../features/notes/notesSlice';
 import NoteEditMode from '../NoteEditMode/NoteEditMode';
 import s from './NoteRecord.module.scss';
 
@@ -9,7 +9,7 @@ const NoteRecord = ({ id }) => {
   const ref = useRef(null);
 
   const handleDelete = () => {
-    dispatch(deleteNote({ id }));
+    dispatch(deleteNoteThunk(id));
   };
 
   const handleEdit = () => {

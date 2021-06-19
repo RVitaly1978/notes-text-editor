@@ -15,8 +15,8 @@ export const getMarkedTagsInText = (text) => {
   const tags = text.match(markedHashTagReg);
 
   if (!tags) {
-    return null;
+    return [];
   }
 
   return tags.map(unmarkTags);
-}
+};
