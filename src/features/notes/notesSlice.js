@@ -1,9 +1,15 @@
 import {
   createAction,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from '@reduxjs/toolkit';
-import { addTagsThunk, compareTagsThunk, deleteTagsThunk } from '../tags/tagsSlice';
+import {
+  addTagsThunk,
+  compareTagsThunk,
+  deleteTagsThunk,
+  selectFilterTagsIds,
+} from '../tags/tagsSlice';
 import { getMarkedTagsInText } from '../../helpers/markTags';
 import { v4 as uuid } from 'uuid';
 
@@ -78,6 +84,19 @@ export const {
   selectAll: selectAllNotes,
   selectById: selectNoteById,
 } = notesAdapter.getSelectors((state) => state[name]);
+
+export const selectFilteredNotesIds = createSelector(
+  [selectAllNotesIds, selectAllNotes, selectFilterTagsIds],
+  (allNotesIds, allNotes, tagsIds) => {
+    let notesIds = [...allNotesIds];
+    if (tagsIds.length) {
+      notesIds = allNotes
+        .filter(({ tags }) => tags.filter((tagId) => tagsIds.includes(tagId)).length)
+        .map(({ id }) => id);
+    }
+    return { notes: notesIds, tags: tagsIds };
+  }
+);
 
 export const createNoteThunk = (note) => (dispatch) => {
   const createdAt = new Date().toISOString();

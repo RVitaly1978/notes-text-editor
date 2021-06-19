@@ -3,6 +3,8 @@
 .container {
   margin: 2rem;
 
+  @include flex();
+
   background-color: $color-background-view;
 
   border: $border;

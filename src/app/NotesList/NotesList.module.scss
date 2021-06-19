@@ -6,3 +6,7 @@
   border: $border;
   border-radius: $radius-border-view;
 }
+
+.filters {
+  @include flex();
+}

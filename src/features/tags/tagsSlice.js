@@ -13,9 +13,7 @@ const tagsAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.createdAt.localeCompare(b.createdAt),
 });
 
-const initialState = {
-  current: null,
-};
+const initialState = {};
 
 const tagsSlice = createSlice({
   name,
@@ -24,9 +22,6 @@ const tagsSlice = createSlice({
     tagAdded: tagsAdapter.addOne,
     tagDeleted: tagsAdapter.removeOne,
     tagUpdated: tagsAdapter.upsertOne,
-    // currentSet: (state, action) => {
-    //   state.current = action.payload;
-    // },
   },
   extraReducers: {},
 });
@@ -35,7 +30,6 @@ export const {
   tagAdded,
   tagDeleted,
   tagUpdated,
-  // currentSet,
 } = tagsSlice.actions;
 
 export const addTag = createAction(
@@ -46,6 +40,7 @@ export const addTag = createAction(
       content,
       createdAt: new Date().toISOString(),
       notes,
+      filter: false,
     },
   })
 );
@@ -60,16 +55,21 @@ export const deleteTag = createAction(
   ({ id }) => ({ payload: id })
 );
 
-// export const setCurrentNote = createAction(
-//   currentSet.toString(),
-//   ({ id }) => ({ payload: id })
-// );
-
 export const {
   selectIds: selectAllTagsIds,
   selectAll: selectAllTags,
   selectById: selectTagById,
 } = tagsAdapter.getSelectors((state) => state[name]);
+
+export const selectFilterTagsIds = createSelector(
+  [selectAllTags],
+  (tags) => {
+    return (tags
+      ? tags.filter(({ filter }) => filter).map(({ id }) => id)
+      : []
+    );
+  }
+);
 
 export const selectTagByContent = createSelector(
   [selectAllTags, (_, tagContent) => tagContent],
