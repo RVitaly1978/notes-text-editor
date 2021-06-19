@@ -1,20 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentNote, selectAllNotesIds } from '../../features/notes/notesSlice';
+import { setCurrentNote, selectFilteredNotesIds } from '../../features/notes/notesSlice';
 import NoteRecord from '../NoteRecord/NoteRecord';
+import TagRecord from '../TagRecord/TagRecord';
 import s from './NotesList.module.scss';
 
 const NotesList = () => {
   const dispatch = useDispatch();
-  const allNotesIds = useSelector(selectAllNotesIds);
+  const { notes, tags } = useSelector(selectFilteredNotesIds);
 
   const handleClick = (_, id) => {
     dispatch(setCurrentNote({ id }));
   };
 
   let notesList = 'No notes yet';
+  let filterList = 'No filters yet';
 
-  if (allNotesIds.length !== 0) {
-    notesList = allNotesIds.map((id) => (
+  if (tags.length !== 0) {
+    filterList = tags.map((id) => (
+      <li key={id}>
+        <TagRecord id={id} />
+      </li>
+    ));
+  }
+
+  if (notes.length !== 0) {
+    notesList = notes.map((id) => (
       <li key={id} onClick={(e) => handleClick(e, id)}>
         <NoteRecord id={id} />
       </li>
@@ -23,6 +33,7 @@ const NotesList = () => {
 
   return (
     <div className={s.container}>
+      <ul className={s.filters}>{filterList}</ul>
       <ul>{notesList}</ul>
     </div>
   );
