@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentNote, selectAllNotesIds } from '../../features/notes/notesSlice';
-import NoteViewer from '../NoteViewer/NoteViewer';
+import NoteRecord from '../NoteRecord/NoteRecord';
 import s from './NotesList.module.scss';
 
 const NotesList = () => {
@@ -16,7 +16,7 @@ const NotesList = () => {
   if (allNotesIds.length !== 0) {
     notesList = allNotesIds.map((id) => (
       <li key={id} onClick={(e) => handleClick(e, id)}>
-        <NoteViewer id={id} />
+        <NoteRecord id={id} />
       </li>
     ));
   }
