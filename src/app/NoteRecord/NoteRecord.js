@@ -2,9 +2,9 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateNote, deleteNote } from '../../features/notes/notesSlice';
 import NoteEditMode from '../NoteEditMode/NoteEditMode';
-import s from './NoteViewer.module.scss';
+import s from './NoteRecord.module.scss';
 
-const NoteViewer = ({ id }) => {
+const NoteRecord = ({ id }) => {
   const dispatch = useDispatch();
   const ref = useRef(null);
 
@@ -48,4 +48,4 @@ const NoteViewer = ({ id }) => {
   );
 };
 
-export default NoteViewer;
+export default NoteRecord;
