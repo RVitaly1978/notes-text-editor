@@ -8,7 +8,7 @@ import {
   addTagsThunk,
   compareTagsThunk,
   deleteTagsThunk,
-  selectFilterTagsIds,
+  selectFilterTags,
 } from '../tags/tagsSlice';
 import { getMarkedTagsInText } from '../../helpers/markTags';
 import { v4 as uuid } from 'uuid';
@@ -86,15 +86,13 @@ export const {
 } = notesAdapter.getSelectors((state) => state[name]);
 
 export const selectFilteredNotesIds = createSelector(
-  [selectAllNotesIds, selectAllNotes, selectFilterTagsIds],
-  (allNotesIds, allNotes, tagsIds) => {
-    let notesIds = [...allNotesIds];
-    if (tagsIds.length) {
-      notesIds = allNotes
-        .filter(({ tags }) => tags.filter((tagId) => tagsIds.includes(tagId)).length)
-        .map(({ id }) => id);
+  [selectAllNotesIds, selectFilterTags],
+  (allNotesIds, filterTags) => {
+    let notes = [...allNotesIds];
+    if (filterTags.length) {
+      notes = [...new Set(filterTags.reduce((acc, tag) => [...acc, ...tag.notes], []))];
     }
-    return { notes: notesIds, tags: tagsIds };
+    return { notes, tags: filterTags.map(({ id }) => id) };
   }
 );
 

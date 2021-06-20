@@ -61,14 +61,9 @@ export const {
   selectById: selectTagById,
 } = tagsAdapter.getSelectors((state) => state[name]);
 
-export const selectFilterTagsIds = createSelector(
+export const selectFilterTags = createSelector(
   [selectAllTags],
-  (tags) => {
-    return (tags
-      ? tags.filter(({ filter }) => filter).map(({ id }) => id)
-      : []
-    );
-  }
+  (tags) => tags ? tags.filter(({ filter }) => filter) : []
 );
 
 export const selectTagByContent = createSelector(
