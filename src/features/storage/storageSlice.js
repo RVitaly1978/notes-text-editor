@@ -1,6 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { setNotesState, name as notes } from '../notes/notesSlice';
 import { setTagsState, name as tags } from '../tags/tagsSlice';
+import { storageFileName } from '../../constants';
 
 export const name = 'storage';
 
@@ -46,7 +47,7 @@ export const saveDataThunk = () => (dispatch, getState) => {
   dispatch(setProcess(true));
 
   const anchor = document.createElement('a');
-  anchor.download = 'notes.json';
+  anchor.download = storageFileName;
   anchor.href = `data:${data}`;
   anchor.dataset.downloadurl = `text/json:${anchor.download}:${anchor.href}`;
   anchor.click();

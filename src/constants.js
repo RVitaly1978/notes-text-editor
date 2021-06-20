@@ -3,3 +3,5 @@ export const footer = {
   authorGitHubText: 'RVitaly1978',
   year: '2021',
 };
+
+export const storageFileName = 'notes.json';
