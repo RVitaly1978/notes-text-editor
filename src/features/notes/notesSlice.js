@@ -33,6 +33,10 @@ const notesSlice = createSlice({
     currentSet: (state, action) => {
       state.current = action.payload;
     },
+    stateUpdated: (state, action) => {
+      state.current = action.payload.current;
+      notesAdapter.setAll(state, action.payload.entities);
+    },
   },
   extraReducers: {},
 });
@@ -42,6 +46,7 @@ export const {
   noteDeleted,
   noteUpdated,
   currentSet,
+  stateUpdated,
 } = notesSlice.actions;
 
 export const addNote = createAction(
@@ -77,6 +82,11 @@ export const deleteNote = createAction(
 export const setCurrentNote = createAction(
   currentSet.toString(),
   ({ id }) => ({ payload: id })
+);
+
+export const setNotesState = createAction(
+  stateUpdated.toString(),
+  (state) => ({ payload: state })
 );
 
 export const {
