@@ -1,9 +1,25 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSearch, selectSearch } from '../../features/tags/tagsSlice';
 import s from './TagSearcher.module.scss';
 
 const TagSearcher = () => {
+  const dispatch = useDispatch();
+  const search = useSelector(selectSearch);
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    if (value !== search) {
+      dispatch(updateSearch(value));
+    }
+  };
+
   return (
     <div className={s.container}>
-      TagSearcher
+      <input className={s.search}
+        type='search'
+        value={search}
+        onChange={handleChange}
+      />
     </div>
   );
 };

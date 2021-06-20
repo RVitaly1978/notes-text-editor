@@ -13,7 +13,9 @@ const tagsAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.createdAt.localeCompare(b.createdAt),
 });
 
-const initialState = {};
+const initialState = {
+  search: '',
+};
 
 const tagsSlice = createSlice({
   name,
@@ -22,6 +24,10 @@ const tagsSlice = createSlice({
     tagAdded: tagsAdapter.addOne,
     tagDeleted: tagsAdapter.removeOne,
     tagUpdated: tagsAdapter.upsertOne,
+    searchUpdated: (state, action) => {
+      state.search = action.payload;
+    },
+
   },
   extraReducers: {},
 });
@@ -30,6 +36,7 @@ export const {
   tagAdded,
   tagDeleted,
   tagUpdated,
+  searchUpdated,
 } = tagsSlice.actions;
 
 export const addTag = createAction(
@@ -55,11 +62,18 @@ export const deleteTag = createAction(
   ({ id }) => ({ payload: id })
 );
 
+export const updateSearch = createAction(
+  searchUpdated.toString(),
+  (search) => ({ payload: search })
+);
+
 export const {
   selectIds: selectAllTagsIds,
   selectAll: selectAllTags,
   selectById: selectTagById,
 } = tagsAdapter.getSelectors((state) => state[name]);
+
+export const selectSearch = (state) => state[name].search;
 
 export const selectFilterTags = createSelector(
   [selectAllTags],
@@ -76,6 +90,16 @@ export const selectTagByContent = createSelector(
   }
 );
 
+export const selectSearchedTagsIds = createSelector(
+  [selectAllTagsIds, selectAllTags, selectSearch],
+  (tagsIds, tags, search) => {
+    if (search.length < 2) {
+      return tagsIds;
+    }
+    return tags.filter(({ content }) => content.includes(search)).map(({ id }) => id);
+  }
+);
+
 export const addTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
   const tagsIds = tags.map((content) => {
     const tag = selectTagByContent(getState(), content);
@@ -89,7 +113,7 @@ export const addTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
     }
   });
   return tagsIds;
-}
+};
 
 export const deleteTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
   tags.forEach((id) => {
@@ -101,7 +125,7 @@ export const deleteTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
       dispatch(updateTag({ id, notes }));
     }
   });
-}
+};
 
 export const compareTagsThunk = ({ tags, tagsContents, noteId }) => (dispatch, getState) => {
   const tagsIds = [];
@@ -121,6 +145,6 @@ export const compareTagsThunk = ({ tags, tagsContents, noteId }) => (dispatch, g
   }
 
   return tagsIds;
-}
+};
 
 export default tagsSlice.reducer;
