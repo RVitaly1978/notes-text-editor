@@ -1,10 +1,6 @@
-import {
-  createAction,
-  // createSelector,
-  createSlice,
-} from '@reduxjs/toolkit';
-// import { removeItemFromArray } from '../../helpers/removeItemFromArray';
-// import { v4 as uuid } from 'uuid';
+import { createAction, createSlice } from '@reduxjs/toolkit';
+import { setNotesState, name as notes } from '../notes/notesSlice';
+import { setTagsState, name as tags } from '../tags/tagsSlice';
 
 export const name = 'storage';
 
@@ -38,91 +34,51 @@ export const selectStateData = (state) => (
  `text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(state))}`
 );
 
-// export const selectFilterTags = createSelector(
-//   [selectAllTags],
-//   (tags) => tags ? tags.filter(({ filter }) => filter) : []
-// );
-
-// export const selectTagByContent = createSelector(
-//   [selectAllTags, (_, tagContent) => tagContent],
-//   (tags, tagContent) => {
-//     if (!tags) {
-//       return null;
-//     }
-//     return tags.find(({ content }) => content === tagContent);
-//   }
-// );
-
-// export const selectSearchedTagsIds = createSelector(
-//   [selectAllTagsIds, selectAllTags, selectSearch],
-//   (tagsIds, tags, search) => {
-//     if (search.length < 2) {
-//       return tagsIds;
-//     }
-//     return tags.filter(({ content }) => content.includes(search)).map(({ id }) => id);
-//   }
-// );
+export const setNewStateThunk = (state) => (dispatch) => {
+  dispatch(setNotesState(state[notes]));
+  dispatch(setTagsState(state[tags]));
+};
 
 export const saveDataThunk = () => (dispatch, getState) => {
-  const data = `text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(getState()))}`;
+  const state = { ...getState() };
+  delete state[name];
+  const data = `text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(state))}`;
   dispatch(setProcess(true));
 
-  const evt = document.createEvent('MouseEvents');
   const anchor = document.createElement('a');
   anchor.download = 'notes.json';
   anchor.href = `data:${data}`;
   anchor.dataset.downloadurl = `text/json:${anchor.download}:${anchor.href}`;
-  evt.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-  anchor.dispatchEvent(evt);
+  anchor.click();
 
   dispatch(setProcess(false));
 };
 
-export const loadDataThunk = () => (dispatch, getState) => {
-  const data = `text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(getState()))}`;
+export const loadDataThunk = (file) => (dispatch) => {
   dispatch(setProcess(true));
 
-  const evt = document.createEvent('MouseEvents');
-  const anchor = document.createElement('a');
-  anchor.download = 'notes.json';
-  anchor.href = `data:${data}`;
-  anchor.dataset.downloadurl = `text/json:${anchor.download}:${anchor.href}`;
-  evt.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-  anchor.dispatchEvent(evt);
-
-  dispatch(setProcess(false));
+  const reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = () => {
+    const state = JSON.parse(reader.result);
+    dispatch(setNewStateThunk(state));
+    dispatch(setProcess(false));
+  };
+  reader.onerror = () => {
+    dispatch(setProcess(false));
+  };
 };
 
-// export const deleteTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
-//   tags.forEach((id) => {
-//     const tag = selectTagById(getState(), id);
-//     const notes = removeItemFromArray(noteId, tag.notes);
-//     if (!notes.length) {
-//       dispatch(deleteTag({ id }));
-//     } else {
-//       dispatch(updateTag({ id, notes }));
-//     }
-//   });
-// };
-
-// export const compareTagsThunk = ({ tags, tagsContents, noteId }) => (dispatch, getState) => {
-//   const tagsIds = [];
-//   tagsContents.forEach((content) => {
-//     let tag = selectTagByContent(getState(), content);
-//     if (!tag) {
-//       const id = uuid();
-//       dispatch(addTag({ id, content, notes: [noteId] }));
-//       tag = { id };
-//     }
-//     tagsIds.push(tag.id);
-//   });
-
-//   const removedTags = tags.filter((tag) => !tagsIds.includes(tag));
-//   if (removedTags.length) {
-//     dispatch(deleteTagsThunk({ tags: removedTags, noteId }));
-//   }
-
-//   return tagsIds;
-// };
+export const preLoadDataThunk = () => (dispatch) => {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.onchange = (evt) => {
+    const file = evt.target.files[0];
+    dispatch(loadDataThunk(file));
+  };
+  const evt = document.createEvent('MouseEvents');
+  evt.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+  input.dispatchEvent(evt);
+};
 
 export default storageSlice.reducer;

@@ -27,7 +27,10 @@ const tagsSlice = createSlice({
     searchUpdated: (state, action) => {
       state.search = action.payload;
     },
-
+    stateUpdated: (state, action) => {
+      state.search = action.payload.search;
+      tagsAdapter.setAll(state, action.payload.entities);
+    },
   },
   extraReducers: {},
 });
@@ -37,6 +40,7 @@ export const {
   tagDeleted,
   tagUpdated,
   searchUpdated,
+  stateUpdated,
 } = tagsSlice.actions;
 
 export const addTag = createAction(
@@ -65,6 +69,11 @@ export const deleteTag = createAction(
 export const updateSearch = createAction(
   searchUpdated.toString(),
   (search) => ({ payload: search })
+);
+
+export const setTagsState = createAction(
+  stateUpdated.toString(),
+  (state) => ({ payload: state })
 );
 
 export const {
@@ -118,6 +127,9 @@ export const addTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
 export const deleteTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
   tags.forEach((id) => {
     const tag = selectTagById(getState(), id);
+    console.log('tagId -----', id);
+    console.log('tag -----', tag);
+    console.log('noteId -----', noteId);
     const notes = removeItemFromArray(noteId, tag.notes);
     if (!notes.length) {
       dispatch(deleteTag({ id }));
