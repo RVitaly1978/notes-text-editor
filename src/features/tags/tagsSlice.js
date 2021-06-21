@@ -105,7 +105,11 @@ export const selectSearchedTagsIds = createSelector(
     if (search.length < 2) {
       return tagsIds;
     }
-    return tags.filter(({ content }) => content.includes(search)).map(({ id }) => id);
+    return tags.filter(({ content }) => (
+      content.toLowerCase()
+        .includes(search.toLowerCase()))
+        .map(({ id }) => id)
+    );
   }
 );
 
