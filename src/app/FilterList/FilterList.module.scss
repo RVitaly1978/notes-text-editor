@@ -1,0 +1,12 @@
+@import '../../styles/abstract/abstracts';
+
+.container {
+  margin: 0 2rem 2rem 2rem;
+
+  @include flex($justify-content: flex-start);
+  flex-wrap: wrap;
+}
+
+.listItem {
+  margin: 0.25rem;
+}
