@@ -1,0 +1,43 @@
+@import '../../../styles/abstract/abstracts';
+
+$line-height: 0.1em;
+
+.icon_container {
+  position: relative;
+
+  @include size(100%);
+
+  font-size: inherit;
+  line-height: 1;
+
+  border: none;
+  background-color: inherit;
+  border-radius: inherit;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+.icon_line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: inline-block;
+
+  width: 1em;
+  height: $line-height;
+
+  background-color: $color-border-view;
+
+  border-radius: calc(0.5 * #{$line-height});
+
+  &:first-child {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &:last-child {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}

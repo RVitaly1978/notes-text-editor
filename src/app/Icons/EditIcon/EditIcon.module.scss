@@ -1,0 +1,19 @@
+@import '../../../styles/abstract/abstracts';
+
+.icon {
+  @include size(100%);
+  cursor: pointer;
+  color: inherit;
+
+  & {
+    fill: currentColor;
+  }
+
+  @include media-hover {
+    &:hover {
+      fill: $color-link-hover;
+    }
+  }
+
+  @extend %transition-hover;
+}

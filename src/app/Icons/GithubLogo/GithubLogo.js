@@ -1,5 +1,3 @@
-import React from 'react';
-
 import s from './GithubLogo.module.scss';
 
 const GithubLogo = ({ iconTitle = '', styleClass = null }) => {
