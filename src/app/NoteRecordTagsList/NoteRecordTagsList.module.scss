@@ -1,0 +1,16 @@
+@import '../../styles/abstract/abstracts';
+
+.list {
+  width: 100%;
+  padding: 1rem 0.5rem;
+
+  @include flex($justify-content: flex-start);
+  flex-wrap: wrap;
+
+  color: $color-tag;
+  line-height: 1.2;
+
+  & > li {
+    margin: 0 0.5rem;
+  }
+}
