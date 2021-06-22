@@ -1,21 +1,43 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
-  margin: 2rem;
+  @include flex($justify-content: space-between, $align-items: flex-end);
+  padding: 1rem;
 
-  background-color: $color-background-view;
-
-  border: $border;
   border-radius: $radius-border-view;
 }
 
 .contentEditable {
+  align-self: stretch;
+
   width: 100%;
+  min-height: 5rem;
   padding: 1rem;
 
-  background-color: rgb(230, 202, 230);
+  background-color: $color-tag-background;
+  border-radius: inherit;
+  line-height: 1.5;
+
+  &:focus {
+    box-shadow: $box-shadow-tag;
+  }
 
   & span {
-    color: red;
+    color: $color-tag;
+  }
+}
+
+.buttonsGroup {
+  @include flex($flex-direction: column);
+
+  margin-left: 1rem;
+
+  & > button {
+    width: 100%;
+    border: $border;
+  }
+
+  & > button + button {
+    margin-top: 1rem;
   }
 }

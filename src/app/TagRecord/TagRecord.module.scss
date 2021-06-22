@@ -1,12 +1,37 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
-  margin: 2rem;
+  @include flex($justify-content: flex-start);
 
+  color: $color-tag;
+}
+
+$size: 3rem;
+
+.input {
+  margin-right: 1rem;
+  color: $color-text;
+
+  position: relative;
+  cursor: pointer;
+
+  & input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+  }
+
+  & :checked ~ .iconBox {
+    box-shadow: inset $box-shadow-tag;
+    color: $color-tag;
+  }
+}
+
+.iconBox {
+  @include size($size);
   @include flex();
+  padding: 0.75rem;
 
-  background-color: $color-background-view;
-
-  border: $border;
-  border-radius: $radius-border-view;
+  background: $color-tag-background;
+  box-shadow: $box-shadow-tag;
+  border-radius: 50%;
 }

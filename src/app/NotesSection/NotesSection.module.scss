@@ -1,10 +1,5 @@
 @import '../../styles/abstract/abstracts';
 
-.notesSection {
+.container {
   flex-grow: 1;
-
-  background-color: $color-background-view;
-
-  border: $border;
-  border-radius: $radius-border-view;
 }

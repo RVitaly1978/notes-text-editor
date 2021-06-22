@@ -1,5 +1,7 @@
+import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTagById, updateTag } from '../../features/tags/tagsSlice';
+import { FilterIcon } from '../Icons';
 import s from './TagRecord.module.scss';
 
 const TagRecord = ({ id }) => {
@@ -12,15 +14,20 @@ const TagRecord = ({ id }) => {
 
   return (
     <div className={s.container}>
-      {tag.content}
+      <label className={s.input}>
+        <input
+          type='checkbox'
+          onChange={handleCheck}
+          checked={tag.filter}
+        />
+        <div className={s.iconBox}>
+          <FilterIcon />
+        </div>
+      </label>
 
-      <input
-        type='checkbox'
-        onChange={handleCheck}
-        checked={tag.filter}
-      />
+      {tag.content}
     </div>
   );
 };
 
-export default TagRecord;
+export default memo(TagRecord);

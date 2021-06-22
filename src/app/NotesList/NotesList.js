@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentNote, selectFilteredNotesIds } from '../../features/notes/notesSlice';
 import NoteRecord from '../NoteRecord/NoteRecord';
-import TagRecord from '../TagRecord/TagRecord';
+import FilterList from '../FilterList/FilterList';
 import s from './NotesList.module.scss';
 
 const NotesList = () => {
@@ -12,16 +12,7 @@ const NotesList = () => {
     dispatch(setCurrentNote({ id }));
   };
 
-  let notesList = 'No notes yet';
-  let filterList = 'No filters yet';
-
-  if (tags.length !== 0) {
-    filterList = tags.map((id) => (
-      <li key={id}>
-        <TagRecord id={id} />
-      </li>
-    ));
-  }
+  let notesList = 'No notes';
 
   if (notes.length !== 0) {
     notesList = notes.map((id) => (
@@ -33,8 +24,10 @@ const NotesList = () => {
 
   return (
     <div className={s.container}>
-      <ul className={s.filters}>{filterList}</ul>
-      <ul>{notesList}</ul>
+      <FilterList tags={tags} />
+      <ul className={s.list}>
+        {notesList}
+      </ul>
     </div>
   );
 };

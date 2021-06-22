@@ -10,13 +10,12 @@ const LoadNotes = () => {
   };
 
   return (
-    <div className={s.container}>
-      <button
-        onClick={handleClick}
-      >
-        Load
-      </button>
-    </div>
+    <button
+      className={s.button}
+      onClick={handleClick}
+    >
+      Load Notes
+    </button>
   );
 };
 

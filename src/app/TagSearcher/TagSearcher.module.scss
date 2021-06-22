@@ -1,15 +1,18 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
-  margin-bottom: 0.5rem;
-
-  background-color: $color-background-view;
-
-  border: $border;
-  border-radius: $radius-border-view;
+  padding: 1rem;
 }
+
+$height: 4rem;
 
 .search {
   width: 100%;
-  padding: 0.5rem 1rem;
+  height: $height;
+  padding: 0 2rem;
+
+  background-color: $color-tag-background;
+  color: $color-tag;
+
+  border-radius: calc(0.5 * #{$height});
 }
