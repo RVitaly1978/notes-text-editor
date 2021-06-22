@@ -1,0 +1,23 @@
+@import '../../styles/abstract/abstracts';
+
+$height: 3rem;
+
+.container {
+  @include flex();
+  height: $height;
+  padding-left: 0.5rem;
+
+  background-color: $color-tag-background;
+  color: $color-tag;
+
+  border-radius: calc(0.5 * #{$height});
+}
+
+.button {
+  @include size($height);
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  background-color: transparent;
+
+  border-radius: 50%;
+}
