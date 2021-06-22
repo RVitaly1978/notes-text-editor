@@ -1,31 +1,55 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
-  margin: 2rem;
-  min-height: 4rem;
+  align-self: stretch;
 
-  background-color: $color-background-view;
-
-  border: $border;
   border-radius: $radius-border-view;
+  background-color: $color-note-background;
 }
 
 .viewMode {
   min-height: 5rem;
-  background-color: orange;
+  box-shadow: $box-shadow-note;
 }
 
 .editMode {
   @extend .viewMode;
-  border-color: red;
+  box-shadow: $box-shadow-tag;
 }
 
 .contentEditable {
-  width: 100%;
+  margin: 0 0.5rem;
   padding: 1rem;
-  background-color: rgb(168, 168, 207);
+
+  background-color: $color-tag-background;
+  border-radius: inherit;
+  line-height: 1.5;
+
+  &:focus {
+    box-shadow: $box-shadow-tag;
+  }
 
   & span {
-    color: blue;
+    color: $color-tag;
+  }
+}
+
+.buttonsGroup {
+  position: absolute;
+  bottom: 0.25rem;
+  right: 0.5rem;
+
+  @include flex($justify-content: flex-end);
+
+  & > button {
+    @include size(3.5rem);
+    padding: 0.75rem;
+
+    border-radius: 50%;
+    background-color: $color-tag-background;
+  }
+
+  & > button + button {
+    margin-left: 0.5rem;
   }
 }

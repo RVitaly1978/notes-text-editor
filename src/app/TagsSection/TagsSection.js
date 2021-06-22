@@ -4,7 +4,7 @@ import s from './TagsSection.module.scss';
 
 const TagsSection = () => {
   return (
-    <section className={s.tagsSection}>
+    <section className={s.container}>
       <TagSearcher />
       <TagsList />
     </section>

@@ -36,15 +36,13 @@ const NoteCreator = () => {
         innerRef={contentEditable}
         onChange={handleChange}
         html={text}
+        // placeholder='Type new note'
       />
 
-      <button
-        onClick={handleClear}
-      >Clear</button>
-
-      <button
-        onClick={handleCreate}
-      >Create</button>
+      <div className={s.buttonsGroup}>
+        <button onClick={handleClear}>Clear</button>
+        <button onClick={handleCreate}>Create</button>
+      </div>
     </div>
   );
 };

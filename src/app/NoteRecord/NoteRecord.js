@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateNote, deleteNoteThunk } from '../../features/notes/notesSlice';
 import NoteEditMode from '../NoteEditMode/NoteEditMode';
+import { DeleteIcon, EditIcon } from '../Icons';
 import s from './NoteRecord.module.scss';
 
 const NoteRecord = ({ id }) => {
@@ -29,21 +30,20 @@ const NoteRecord = ({ id }) => {
   }
 
   return (
-    <div className={s.container}
-      ref={ref}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      tabIndex={1}
-    >
-      <NoteEditMode id={id} getFocus={getFocus} />
+    <div className={s.container}>
+      <div className={s.editor}
+        ref={ref}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        tabIndex={1}
+      >
+        <NoteEditMode id={id} getFocus={getFocus} />
+      </div>
 
-      <button
-        onClick={handleDelete}
-      >Delete</button>
-
-      <button
-        onClick={handleEdit}
-      >Edit</button>
+      <div className={s.buttonsGroup}>
+        <button onClick={handleDelete}><DeleteIcon /></button>
+        <button onClick={handleEdit}><EditIcon /></button>
+      </div>
     </div>
   );
 };

@@ -12,14 +12,13 @@ const SaveNotes = () => {
   };
 
   return (
-    <div className={s.container}>
-      <button
-        disabled={!notes.length}
-        onClick={handleClick}
-      >
-        Save
-      </button>
-    </div>
+    <button
+      className={s.button}
+      disabled={!notes.length}
+      onClick={handleClick}
+    >
+      Save Notes
+    </button>
   );
 };
 

@@ -106,6 +106,11 @@ export const selectFilteredNotesIds = createSelector(
   }
 );
 
+export const selectNoteTagsIdsByNoteId = createSelector(
+  [selectNoteById],
+  ({ tags }) => tags.length ? tags : []
+);
+
 export const createNoteThunk = (note) => (dispatch) => {
   const createdAt = new Date().toISOString();
   const id = uuid();

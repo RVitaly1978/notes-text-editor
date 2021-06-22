@@ -1,8 +1,13 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
-  background-color: $color-background-view;
+  padding: 1rem;
+}
 
-  border: $border;
-  border-radius: $radius-border-view;
+.list {
+  padding: 0 2rem;
+}
+
+.listItem {
+  padding: 0.5rem 0;
 }

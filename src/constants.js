@@ -4,4 +4,5 @@ export const footer = {
   year: '2021',
 };
 
+export const logoText = 'Notes Text Editor';
 export const storageFileName = 'notes.json';

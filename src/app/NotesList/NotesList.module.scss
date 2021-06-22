@@ -1,12 +1,15 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
-  background-color: $color-background-view;
-
-  border: $border;
-  border-radius: $radius-border-view;
+  padding: 2rem 1rem;
 }
 
 .filters {
   @include flex();
+}
+
+.list {
+  & > li {
+    padding: 0 0 2rem 0;
+  }
 }

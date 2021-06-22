@@ -4,6 +4,9 @@ import clsx from 'clsx';
 import ContentEditable from 'react-contenteditable';
 import { markTagsInText } from '../../helpers/markTags';
 import { updateNote, updateNoteThunk, selectNoteById } from '../../features/notes/notesSlice';
+import NoteRecordTagsList from '../NoteRecordTagsList/NoteRecordTagsList';
+import NoteDate from '../NoteDate/NoteDate';
+import { SaveIcon, CancelIcon } from '../Icons';
 import s from './NoteEditMode.module.scss';
 
 const NoteEditMode = ({ id, getFocus }) => {
@@ -41,12 +44,13 @@ const NoteEditMode = ({ id, getFocus }) => {
   };
 
   return (
-    <div>
+    <>
       <div className={clsx(
         s.container,
         isViewMode && s.viewMode,
         isEditMode && s.editMode,
       )}>
+        <NoteDate id={id} />
         <ContentEditable
           className={s.contentEditable}
           disabled={!isEditMode}
@@ -54,20 +58,16 @@ const NoteEditMode = ({ id, getFocus }) => {
           onChange={handleChange}
           html={text}
         />
+        <NoteRecordTagsList id={id} />
       </div>
 
       {isEditMode && (
-        <button
-          onClick={handleCancel}
-        >Cancel</button>
+        <div className={s.buttonsGroup}>
+          <button onClick={handleCancel}><CancelIcon /></button>
+          <button onClick={handleSave}><SaveIcon /></button>
+        </div>
       )}
-
-      {isEditMode && (
-        <button
-          onClick={handleSave}
-        >Save</button>
-      )}
-    </div>
+    </>
   );
 };
 

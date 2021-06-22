@@ -17,6 +17,7 @@ const TagSearcher = () => {
     <div className={s.container}>
       <input className={s.search}
         type='search'
+        placeholder='Search tags'
         value={search}
         onChange={handleChange}
       />

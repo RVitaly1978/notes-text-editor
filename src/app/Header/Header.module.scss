@@ -4,31 +4,26 @@
   position: relative;
 
   width: 100%;
-  height: $header-hight;
+  min-height: $header-hight;
   padding: 0.5rem 2rem;
 
   @include flex($justify-content: space-between);
 
-  background-color: $color-background-view;
-
-  border: $border;
-  border-radius: $radius-border-view;
+  // border-bottom: $border;
 
   user-select: none;
-
-  @include media-surface {
-    height: $header-hight-surface;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-
-    flex-direction: column;
-  }
 }
 
 .logo {
   height: 100%;
-  @include flex($align-items: stretch);
+  @include flex($align-items: center);
 
   color: $color-text-marked;
   text-shadow: $text-shadow;
+}
+
+.buttonsGroup {
+  & > button + button {
+    margin-left: 1rem;
+  }
 }

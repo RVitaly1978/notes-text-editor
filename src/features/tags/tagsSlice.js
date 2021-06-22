@@ -113,6 +113,18 @@ export const selectSearchedTagsIds = createSelector(
   }
 );
 
+export const selectMultipleTagsContentByIds = createSelector(
+  [selectAllTags, (_, tagsIds) => tagsIds],
+  (tags, tagsIds) => {
+    if (!tagsIds.length) {
+      return [];
+    }
+    return tags
+      .filter(({ id }) => tagsIds.includes(id))
+      .map(({ content }) => content);
+  }
+);
+
 export const addTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
   const tagsIds = tags.map((content) => {
     const tag = selectTagByContent(getState(), content);
