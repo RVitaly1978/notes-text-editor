@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 export const name = 'tags';
 
 const tagsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.createdAt.localeCompare(b.createdAt),
+  sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
 const initialState = {
