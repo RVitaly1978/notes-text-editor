@@ -14,7 +14,7 @@
 
 .editMode {
   @extend .viewMode;
-  box-shadow: $box-shadow-tag;
+  // box-shadow: $box-shadow-tag;
 }
 
 .contentEditable {
@@ -26,10 +26,10 @@
   line-height: 1.5;
 
   &:focus {
-    box-shadow: $box-shadow-tag;
+    box-shadow: inset $box-shadowSmall-tag;
   }
 
-  & span {
+  & hash {
     color: $color-tag;
   }
 }

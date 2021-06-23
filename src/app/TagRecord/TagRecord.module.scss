@@ -4,9 +4,15 @@
   @include flex($justify-content: flex-start);
 
   color: $color-tag;
+
+  & > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
-$size: 3rem;
+$size: 4rem;
 
 .input {
   margin-right: 1rem;
@@ -29,9 +35,9 @@ $size: 3rem;
 .iconBox {
   @include size($size);
   @include flex();
-  padding: 0.75rem;
+  padding: 1rem;
 
   background: $color-tag-background;
-  box-shadow: $box-shadow-tag;
+  // box-shadow: $box-shadow-tag;
   border-radius: 50%;
 }

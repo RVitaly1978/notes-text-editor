@@ -19,10 +19,10 @@
   line-height: 1.5;
 
   &:focus {
-    box-shadow: $box-shadow-tag;
+    box-shadow: inset $box-shadowSmall-tag;
   }
 
-  & span {
+  & hash {
     color: $color-tag;
   }
 }
@@ -34,7 +34,6 @@
 
   & > button {
     width: 100%;
-    border: $border;
   }
 
   & > button + button {

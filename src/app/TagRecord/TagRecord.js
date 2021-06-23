@@ -25,7 +25,7 @@ const TagRecord = ({ id }) => {
         </div>
       </label>
 
-      {tag.content}
+      <span>{tag.content}</span>
     </div>
   );
 };

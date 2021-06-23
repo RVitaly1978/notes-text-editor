@@ -8,6 +8,7 @@
   $color-text: #2b2b2b;
   $color-text-marked: #1a1a1a;
 
+  $active-color: #fd3376;
   $color-tag: #6a1ef7;
   $color-tag-background: #f0f0f0e1;
   $color-note-background: #c9c3c3e1;
@@ -57,7 +58,8 @@
   $border-light: 1px solid $color-background;
   $box-shadow: 0px 0px 3px 1px $color-border-view;
   $box-shadow-dialog: 0px 0px 2px 1px $color-background-dialog;
-  $box-shadow-tag: 0px 0px 5px 0px $color-tag;
+  $box-shadow-tag: 0px 0px 5px 2px $active-color;
+  $box-shadowSmall-tag: 0px 0px 3px 1px $active-color;
   $box-shadow-note: 0px 0px 5px 5px $color-tag-background;
   $text-shadow: 1px 1px 2px $color-text;
 

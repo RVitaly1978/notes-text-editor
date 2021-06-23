@@ -124,18 +124,19 @@ button {
   padding: 1rem 1.5rem;
 
   border-radius: $btn-border-radius;
-  color: firebrick;
+  background-color: $color-tag-background;
+  color: $active-color;
 
   @extend %transition-hover;
 
   @include media-hover {
     &:hover {
-      background-color: $color-link;
+      background-color: $color-note-background;
     }
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.25;
     cursor: none;
     pointer-events: none;
   }
@@ -151,17 +152,4 @@ input {
 
   font: inherit;
   color: inherit;
-}
-
-table {
-  border-spacing: 0;
-}
-
-:fullscreen::backdrop {
-  margin: 0.1rem !important;
-  padding: 0.5rem;
-
-  background-color: $color-background;
-  border: $border;
-  border-radius: $radius-border-view;
 }
