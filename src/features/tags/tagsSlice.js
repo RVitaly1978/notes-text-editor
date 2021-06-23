@@ -86,13 +86,13 @@ export const selectSearch = (state) => state[name].search;
 
 export const selectFilterTags = createSelector(
   [selectAllTags],
-  (tags) => tags ? tags.filter(({ filter }) => filter) : []
+  (tags) => tags.length ? tags.filter(({ filter }) => filter) : []
 );
 
 export const selectTagByContent = createSelector(
   [selectAllTags, (_, tagContent) => tagContent],
   (tags, tagContent) => {
-    if (!tags) {
+    if (!tags.length) {
       return null;
     }
     return tags.find(({ content }) => content === tagContent);
@@ -105,11 +105,9 @@ export const selectSearchedTagsIds = createSelector(
     if (search.length < 2) {
       return tagsIds;
     }
-    return tags.filter(({ content }) => (
-      content.toLowerCase()
-        .includes(search.toLowerCase()))
-        .map(({ id }) => id)
-    );
+    return tags.filter(
+      ({ content }) => content.toLowerCase().includes(search.toLowerCase())
+    ).map(({ id }) => id);
   }
 );
 
@@ -133,7 +131,7 @@ export const addTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
       dispatch(addTag({ id, content, notes: [noteId] }));
       return id;
     } else {
-      dispatch(updateTag({ id: tag.id, notes: [...new Set([...tag.notes, noteId])] }));
+      dispatch(updateTag({ id: tag.id, notes: [...tag.notes, noteId] }));
       return tag.id;
     }
   });
@@ -143,9 +141,6 @@ export const addTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
 export const deleteTagsThunk = ({ tags, noteId }) => (dispatch, getState) => {
   tags.forEach((id) => {
     const tag = selectTagById(getState(), id);
-    console.log('tagId -----', id);
-    console.log('tag -----', tag);
-    console.log('noteId -----', noteId);
     const notes = removeItemFromArray(noteId, tag.notes);
     if (!notes.length) {
       dispatch(deleteTag({ id }));
@@ -167,7 +162,11 @@ export const compareTagsThunk = ({ tags, tagsContents, noteId }) => (dispatch, g
     tagsIds.push(tag.id);
   });
 
-  const removedTags = tags.filter((tag) => !tagsIds.includes(tag));
+  let removedTags = [];
+  if (tags.length) {
+    removedTags = tags.filter((id) => !tagsIds.includes(id));
+  }
+
   if (removedTags.length) {
     dispatch(deleteTagsThunk({ tags: removedTags, noteId }));
   }

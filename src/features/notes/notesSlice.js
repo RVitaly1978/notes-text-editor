@@ -16,7 +16,7 @@ import { v4 as uuid } from 'uuid';
 export const name = 'notes';
 
 const notesAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.createdAt.localeCompare(b.createdAt),
+  sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
 const initialState = {
@@ -114,7 +114,7 @@ export const selectNoteTagsIdsByNoteId = createSelector(
 export const createNoteThunk = (note) => (dispatch) => {
   const createdAt = new Date().toISOString();
   const id = uuid();
-  let tags = getMarkedTagsInText(note);
+  let tags = [...new Set(getMarkedTagsInText(note))];
 
   if (!tags.length) {
     dispatch(addNote({ content: note, createdAt, id, tags: [] }));
@@ -127,10 +127,11 @@ export const createNoteThunk = (note) => (dispatch) => {
 
 export const updateNoteThunk = ({ id, content, isEditMode }) => (dispatch, getState) => {
   const note = selectNoteById(getState(), id);
-  const tagsContents = getMarkedTagsInText(content);
+  const tagsContents = [...new Set(getMarkedTagsInText(content))];
+
   let tags = [...note.tags];
 
-  if (tagsContents.length) {
+  if (tags.length || tagsContents.length) {
     tags = dispatch(compareTagsThunk({ tags, tagsContents, noteId: id }));
   }
 
