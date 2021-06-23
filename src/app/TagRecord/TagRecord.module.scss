@@ -1,22 +1,7 @@
 @import '../../styles/abstract/abstracts';
 
-.container {
-  @include flex($justify-content: flex-start);
-
-  color: $color-tag;
-
-  & > span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-$size: 4rem;
-
 .input {
-  margin-right: 1rem;
-  color: $color-text;
+  @include flex($justify-content: flex-start);
 
   position: relative;
   cursor: pointer;
@@ -28,16 +13,26 @@ $size: 4rem;
 
   & :checked ~ .iconBox {
     box-shadow: inset $box-shadow-tag;
-    color: $color-tag;
+    color: $active-color;
   }
 }
 
 .iconBox {
-  @include size($size);
-  @include flex();
+  display: inline-block;
+
+  @include size($icon-size);
   padding: 1rem;
+  margin-right: 1rem;
 
   background: $color-tag-background;
-  // box-shadow: $box-shadow-tag;
   border-radius: 50%;
+}
+
+.tag {
+  color: $color-tag;
+  line-height: 1.5;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

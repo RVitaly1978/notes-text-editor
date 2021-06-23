@@ -6,7 +6,7 @@ const FilterIcon = ({ styleClass = null }) => {
       className={`${s.icon} ${styleClass}`}
       width="300"
       height="300"
-      viewBox="0 0 300 300"
+      viewBox="0 -20 300 300"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>

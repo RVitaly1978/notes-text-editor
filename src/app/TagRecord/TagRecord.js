@@ -13,20 +13,17 @@ const TagRecord = ({ id }) => {
   };
 
   return (
-    <div className={s.container}>
-      <label className={s.input}>
-        <input
-          type='checkbox'
-          onChange={handleCheck}
-          checked={tag.filter}
-        />
-        <div className={s.iconBox}>
-          <FilterIcon />
-        </div>
-      </label>
-
-      <span>{tag.content}</span>
-    </div>
+    <label className={s.input}>
+      <input
+        type='checkbox'
+        onChange={handleCheck}
+        checked={tag.filter}
+      />
+      <span className={s.iconBox}>
+        <FilterIcon />
+      </span>
+      <span className={s.tag}>{tag.content}</span>
+    </label>
   );
 };
 

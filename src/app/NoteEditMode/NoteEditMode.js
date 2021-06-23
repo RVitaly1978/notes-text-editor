@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import ContentEditable from 'react-contenteditable';
@@ -19,7 +19,10 @@ const NoteEditMode = ({ id, getFocus }) => {
 
   useEffect(() => {
     setText(content);
-  }, [content]);
+    if (isEditMode) {
+      contentEditable.current.focus();
+    }
+  }, [content, isEditMode]);
 
   const handleCancel = () => {
     getFocus();
