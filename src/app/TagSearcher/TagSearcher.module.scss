@@ -15,4 +15,8 @@ $height: 4rem;
   color: $color-tag;
 
   border-radius: calc(0.5 * #{$height});
+
+  &:focus {
+    box-shadow: inset $box-shadowSmall-tag;
+  }
 }

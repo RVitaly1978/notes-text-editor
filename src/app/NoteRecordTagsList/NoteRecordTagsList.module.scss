@@ -7,10 +7,15 @@
   @include flex($justify-content: flex-start);
   flex-wrap: wrap;
 
-  color: $color-tag;
   line-height: 1.2;
 
   & > li {
+    color: $color-tag;
     margin: 0 0.5rem;
+  }
+
+  & > p {
+    margin: 0 0.5rem;
+    opacity: 0.25;
   }
 }

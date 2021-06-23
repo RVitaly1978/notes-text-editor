@@ -12,7 +12,9 @@ const NoteRecordTagsList = ({ id }) => {
     tagsList = noteTags.map((tag) => <li key={tag}>{tag}</li>);
   }
 
-  return noteTags.length ? (<ul className={s.list}>{tagsList}</ul>) : null;
+  return (
+    <ul className={s.list}>{noteTags.length ? tagsList : <p>No tags</p>}</ul>
+  );
 };
 
 export default NoteRecordTagsList;
