@@ -2,9 +2,10 @@
 
 .container {
   padding: 1rem;
+  @extend %animation-fadeIn;
 }
 
-$height: 4rem;
+$height: 5rem;
 
 .search {
   width: 100%;
@@ -18,5 +19,9 @@ $height: 4rem;
 
   &:focus {
     box-shadow: inset $box-shadowSmall-tag;
+  }
+
+  &:disabled {
+    opacity: 0.25;
   }
 }

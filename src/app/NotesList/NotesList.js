@@ -12,7 +12,7 @@ const NotesList = () => {
     dispatch(setCurrentNote({ id }));
   };
 
-  let notesList = 'No notes';
+  let notesList = <p className={s.emptyListItem}>No notes</p>;
 
   if (notes.length !== 0) {
     notesList = notes.map((id) => (

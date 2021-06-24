@@ -8,8 +8,7 @@
   padding: 0.5rem 2rem;
 
   @include flex($justify-content: space-between);
-
-  // border-bottom: $border;
+  @extend %animation-fadeIn;
 
   user-select: none;
 }
@@ -18,7 +17,7 @@
   height: 100%;
   @include flex($align-items: center);
 
-  color: $color-text-marked;
+  color: $active-color;
   text-shadow: $text-shadow;
 }
 

@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSearch, selectSearch } from '../../features/tags/tagsSlice';
+import { updateSearch, selectSearch, selectAllTagsIds } from '../../features/tags/tagsSlice';
 import s from './TagSearcher.module.scss';
 
 const TagSearcher = () => {
   const dispatch = useDispatch();
   const search = useSelector(selectSearch);
+  const items = useSelector(selectAllTagsIds);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -20,6 +21,7 @@ const TagSearcher = () => {
         placeholder='Search tags'
         value={search}
         onChange={handleChange}
+        disabled={!items.length}
       />
     </div>
   );

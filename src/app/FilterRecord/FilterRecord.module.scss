@@ -11,6 +11,8 @@ $height: 3rem;
   color: $color-tag;
 
   border-radius: calc(0.5 * #{$height});
+
+  @extend %animation-fadeIn;
 }
 
 .button {

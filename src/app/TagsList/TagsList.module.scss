@@ -4,9 +4,7 @@
   padding: 1rem;
 }
 
-.list {
-  padding: 0 2rem;
-}
+.list {}
 
 .listItem {
   margin: 0.5rem 0;
@@ -20,4 +18,9 @@
       background-color: $color-note-background;
     }
   }
+}
+
+.emptyListItem {
+  padding-left: 2rem;
+  opacity: 0.25;
 }

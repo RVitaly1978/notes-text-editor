@@ -2,6 +2,7 @@
 
 .container {
   @include flex($justify-content: space-between, $align-items: flex-start);
+  @extend %animation-fadeIn;
 }
 
 .editor {

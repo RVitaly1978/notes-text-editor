@@ -1,5 +1,5 @@
 // Color
-  $color-background: #ada9a9;
+  $color-background: #dddddd;
   $color-background-view: #cbcbcb;
   $color-background-view-opacity: #cbcbcbcb;
 
@@ -61,7 +61,7 @@
   $box-shadow-tag: 0px 0px 5px 2px $active-color;
   $box-shadowSmall-tag: 0px 0px 3px 1px $active-color;
   $box-shadow-note: 0px 0px 5px 5px $color-tag-background;
-  $text-shadow: 1px 1px 2px $color-text;
+  $text-shadow: 1px 1px 2px $color-tag-background;
 
   $btn-border-radius: 2px;
   $radius-border-view: 4px;
