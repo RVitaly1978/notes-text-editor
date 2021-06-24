@@ -6,7 +6,7 @@ import s from './TagsList.module.scss';
 const TagsList = () => {
   const tagsIds = useSelector(selectSearchedTagsIds);
 
-  let tagsList = 'No tags';
+  let tagsList = <p className={s.emptyListItem}>No tags</p>;
 
   if (tagsIds.length !== 0) {
     tagsList = tagsIds.map((id) => (

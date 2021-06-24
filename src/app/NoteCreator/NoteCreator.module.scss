@@ -5,6 +5,8 @@
   padding: 1rem;
 
   border-radius: $radius-border-view;
+
+  @extend %animation-fadeIn;
 }
 
 .contentEditable {
