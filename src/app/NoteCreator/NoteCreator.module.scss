@@ -1,12 +1,24 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
+  position: relative;
+
   @include flex($justify-content: space-between, $align-items: flex-end);
   padding: 1rem;
 
   border-radius: $radius-border-view;
 
   @extend %animation-fadeIn;
+}
+
+.label {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+
+  line-height: 1.5;
+  font-size: 2rem;
+  opacity: 0.5;
 }
 
 .contentEditable {

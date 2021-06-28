@@ -1,9 +1,9 @@
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
-import ContentEditable from 'react-contenteditable';
 import { markTagsInText } from '../../helpers/markTags';
 import { updateNote, updateNoteThunk, selectNoteById } from '../../features/notes/notesSlice';
+import ContentEditable from '../ContentEditable/ContentEditable';
 import NoteRecordTagsList from '../NoteRecordTagsList/NoteRecordTagsList';
 import NoteDate from '../NoteDate/NoteDate';
 import { SaveIcon, CancelIcon } from '../Icons';
@@ -14,6 +14,7 @@ const NoteEditMode = ({ id, getFocus }) => {
   const note = useSelector((state) => selectNoteById(state, id));
   const contentEditable  = useRef('');
   const [text, setText] = useState('');
+  const [caretPosition, setCaretPosition] = useState(null);
 
   const { content, isEditMode, isViewMode } = note;
 
@@ -42,8 +43,9 @@ const NoteEditMode = ({ id, getFocus }) => {
   };
 
   const handleChange = (e) => {
-    const { value } = e.target;
+    const { value, caretPosition } = e.target;
     setText(markTagsInText(value));
+    setCaretPosition(caretPosition);
   };
 
   return (
@@ -56,10 +58,11 @@ const NoteEditMode = ({ id, getFocus }) => {
         <NoteDate id={id} />
         <ContentEditable
           className={s.contentEditable}
+          caret={caretPosition}
           disabled={!isEditMode}
+          html={text}
           innerRef={contentEditable}
           onChange={handleChange}
-          html={text}
         />
         <NoteRecordTagsList id={id} />
       </div>
