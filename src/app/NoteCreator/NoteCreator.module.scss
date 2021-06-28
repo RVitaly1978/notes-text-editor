@@ -19,6 +19,9 @@
   line-height: 1.5;
   font-size: 2rem;
   opacity: 0.5;
+
+  user-select: none;
+  pointer-events: none;
 }
 
 .contentEditable {
