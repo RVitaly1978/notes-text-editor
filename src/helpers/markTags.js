@@ -1,13 +1,13 @@
 const hash = '<[/]*hash.*?>';
 const hashTagReg = new RegExp(hash, 'mg');
-const styledTagReg = /(<div|<span) (style=".*?")(>)/mg;
+const styledTagReg = /(<.*?)(style=".*?"|color=".*?")(>)/mg;
 const spanTagReg = /<[/]*span>/mg;
 const withHashTagReg = /(^|\s|&nbsp;|>)(#[a-zа-яё0-9][а-яё\w-]*[(?![a-zа-яё0-9_\])])/uigm;
 
 export const unmarkTags = (text) => (
   text
     .replace(hashTagReg, '')
-    .replace(styledTagReg, '$1 $3')
+    .replace(styledTagReg, '$1$3')
     .replace(spanTagReg, '')
 );
 
