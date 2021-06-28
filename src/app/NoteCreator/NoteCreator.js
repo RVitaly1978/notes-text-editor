@@ -44,7 +44,7 @@ const NoteCreator = () => {
       />
 
       <div className={s.buttonsGroup}>
-        <button onClick={handleClear} disabled={!text}>Clear</button>
+        <button disabled={!text} onClick={handleClear}>Clear</button>
         <button onClick={handleCreate}>Create</button>
       </div>
     </div>

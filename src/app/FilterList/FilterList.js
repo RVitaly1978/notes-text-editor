@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import FilterRecord from '../FilterRecord/FilterRecord';
 import s from './FilterList.module.scss';
 
@@ -19,4 +20,4 @@ const FilterList = ({ tags }) => {
   ) : null;
 };
 
-export default FilterList;
+export default memo(FilterList);

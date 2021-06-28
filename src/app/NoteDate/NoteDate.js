@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectNoteById } from '../../features/notes/notesSlice';
 import formattingDate from '../../helpers/formattingDate';
@@ -14,4 +15,4 @@ const NoteDate = ({ id }) => {
   return <p className={s.dateInfo}>{dateInfo}</p>;
 };
 
-export default NoteDate;
+export default memo(NoteDate);
