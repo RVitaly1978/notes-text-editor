@@ -8,20 +8,8 @@
   transition: background-image 0.2s ease-out;
 }
 
-%transition-hidden {
-  transition: all 0.5s ease-in-out;
-}
-
-%transition-input-radio {
-  transition: opacity 0.2s linear, font 0.2s ease-out;
-}
-
 %transition-hover {
   transition: background-color 0.3s linear, color 0.3s linear, fill 0.3s linear;
-}
-
-%transition-inactive {
-  transition: filter 0.6s;
 }
 
 %animation-fadeIn {

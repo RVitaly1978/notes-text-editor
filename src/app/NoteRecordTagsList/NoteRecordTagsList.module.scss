@@ -2,20 +2,28 @@
 
 .list {
   width: 100%;
-  padding: 1rem 0.5rem;
+  padding: 1.5rem 0.5rem;
+  min-height: 5rem;
 
   @include flex($justify-content: flex-start);
   flex-wrap: wrap;
 
   line-height: 1.2;
 
+  @include media-mobile {
+    font-size: 1.4rem;
+  }
+
   & > li {
-    color: $color-tag;
     margin: 0 0.5rem;
+    color: $color-tag;
+    opacity: 0.50;
   }
 
   & > p {
     margin: 0 0.5rem;
     opacity: 0.25;
+
+    user-select: none;
   }
 }

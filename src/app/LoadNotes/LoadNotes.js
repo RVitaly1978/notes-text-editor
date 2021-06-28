@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { preLoadDataThunk } from '../../features/storage/storageSlice';
-import s from './LoadNotes.module.scss';
 
 const LoadNotes = () => {
   const dispatch = useDispatch();
@@ -10,10 +9,7 @@ const LoadNotes = () => {
   };
 
   return (
-    <button
-      className={s.button}
-      onClick={handleClick}
-    >
+    <button onClick={handleClick}>
       Load Notes
     </button>
   );

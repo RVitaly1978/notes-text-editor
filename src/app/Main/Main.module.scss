@@ -2,10 +2,14 @@
 
 .main {
   margin-top: 3rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
 
   flex-grow: 1;
   @include flex($align-items: stretch, $justify-content: flex-start);
 
   @extend %animation-fadeIn;
+
+  @include media-landscape {
+    flex-direction: column;
+  }
 }

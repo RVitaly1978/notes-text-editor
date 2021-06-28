@@ -1,7 +1,7 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
-  padding: 3rem 1rem 1rem;
+  padding: 2rem 1rem 1rem;
 }
 
 .filters {
@@ -10,11 +10,13 @@
 
 .list {
   & > li {
-    padding: 0 0 4rem 0;
+    padding: 1rem 0 3rem;
   }
 }
 
 .emptyListItem {
   padding-left: 2rem;
   opacity: 0.25;
+
+  user-select: none;
 }
