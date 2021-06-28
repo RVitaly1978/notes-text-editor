@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectNoteTagsIdsByNoteId } from '../../features/notes/notesSlice';
 import { selectMultipleTagsContentByIds } from '../../features/tags/tagsSlice';
@@ -17,4 +18,4 @@ const NoteRecordTagsList = ({ id }) => {
   );
 };
 
-export default NoteRecordTagsList;
+export default memo(NoteRecordTagsList);

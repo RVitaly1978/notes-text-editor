@@ -1,12 +1,13 @@
-import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateNote, deleteNoteThunk } from '../../features/notes/notesSlice';
+import { memo, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateNote, deleteNoteThunk, selectNoteById } from '../../features/notes/notesSlice';
 import NoteEditMode from '../NoteEditMode/NoteEditMode';
 import { DeleteIcon, EditIcon } from '../Icons';
 import s from './NoteRecord.module.scss';
 
 const NoteRecord = ({ id }) => {
   const dispatch = useDispatch();
+  const { isEditMode } = useSelector((s) => selectNoteById(s, id));
   const ref = useRef(null);
 
   const handleDelete = () => {
@@ -42,10 +43,13 @@ const NoteRecord = ({ id }) => {
 
       <div className={s.buttonsGroup}>
         <button onClick={handleDelete}><DeleteIcon /></button>
-        <button onClick={handleEdit}><EditIcon /></button>
+        <button
+          disabled={isEditMode}
+          onClick={handleEdit}
+        ><EditIcon /></button>
       </div>
     </div>
   );
 };
 
-export default NoteRecord;
+export default memo(NoteRecord);
