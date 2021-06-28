@@ -1,69 +1,25 @@
-// Color
-  $color-background: #dddddd;
-  $color-background-view: #cbcbcb;
-  $color-background-view-opacity: #cbcbcbcb;
-
-  $color-border-view: #1a1a1a;
-
+  $color-background: #e7e7e7;
   $color-text: #2b2b2b;
-  $color-text-marked: #1a1a1a;
 
-  $active-color: #fd3376;
-  $color-tag: #6a1ef7;
-  $color-tag-background: #f0f0f0e1;
+  $active-color: #f5115d;
+  $color-tag: #8344f7;
+  $color-tag-background: #f7f7f7e1;
   $color-note-background: #d3d2d2e1;
 
-  $color-link: #8b8b8b;
-  $color-link-hover: #1a1a1a;
-
-  $color-background-dialog: #1a1a1afa;
-  $color-text-dialog: #f0f0f0e1;
-
-  $color-shadow: rgba(0, 0, 0, 0.3);
-  $color-shadow-light: rgba(0, 0, 0, 0.1);
-
-// Content width
   $content-width-wide: 1440px;
-  $content-width-laptop: 1280px;
-  $content-width-tablet: 1024px;
-  $content-width-landscape: 830px;
-  $content-width-surface: 550px;
-  $content-width-mobile: 420px;
-  $content-width-min: 310px;
+  $content-width-landscape: 850px;
+  $content-width-surface: 600px;
+  $content-width-mobile: 480px;
 
-  $content-hight-tabletHight: 767px;
-
-  $padding-wide: 3.5rem;
-  $padding-laptop: 3.0rem;
-  $padding-tablet: 2.5rem;
-  $padding-landscape: 2.0rem;
-  $padding-surface: 1.5rem;
-  $padding-mobile: 1.0rem;
-
-// dimensions
   $header-hight: 5rem;
-  $header-hight-surface: 7rem;
   $footer-hight: 5rem;
 
-  // Tooltips
-  $font-size-tooltips: 1.2rem;
-  $color-background-tooltip: $color-background-dialog;
-  $color-tooltip: $color-text-dialog;
-  $z-tooltips: 10000;
-  $radius-border-tooltips: 4px;
-  $box-shadow-tooltips: 0 0 2px 1px $color-background-tooltip;
-
-  // Border
-  $border: 1px solid $color-border-view;
-  $border-light: 1px solid $color-background;
-  $box-shadow: 0px 0px 3px 1px $color-border-view;
-  $box-shadow-dialog: 0px 0px 2px 1px $color-background-dialog;
   $box-shadow-tag: 0px 0px 5px 2px $active-color;
   $box-shadowSmall-tag: 0px 0px 3px 1px $active-color;
   $box-shadow-note: 0px 0px 5px 5px $color-tag-background;
   $text-shadow: 1px 1px 2px $color-tag-background;
 
-  $btn-border-radius: 2px;
+  $btn-border-radius: 1.5rem;
   $radius-border-view: 4px;
 
   $icon-size: 4rem;

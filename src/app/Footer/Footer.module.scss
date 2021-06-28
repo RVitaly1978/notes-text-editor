@@ -5,11 +5,9 @@
 
   width: 100%;
   min-height: $footer-hight;
-  padding: 0.5rem 2rem;
+  padding: 1rem 2rem;
 
   @include flex($justify-content: space-between);
-
-  // border-top: $border;
 
   user-select: none;
 }
@@ -17,15 +15,13 @@
 .footer_link {
   @include flex();
 
-  color: $color-link;
-
   text-decoration: none;
 
   @extend %transition-hover;
 
   @include media-hover {
     &:hover {
-      color: $color-link-hover;
+      color: $active-color;
       outline: none;
     }
   }

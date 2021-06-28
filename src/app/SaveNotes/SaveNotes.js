@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { saveDataThunk } from '../../features/storage/storageSlice';
 import { selectAllNotesIds } from '../../features/notes/notesSlice';
-import s from './SaveNotes.module.scss';
 
 const SaveNotes = () => {
   const dispatch = useDispatch();
@@ -13,7 +12,6 @@ const SaveNotes = () => {
 
   return (
     <button
-      className={s.button}
       disabled={!notes.length}
       onClick={handleClick}
     >

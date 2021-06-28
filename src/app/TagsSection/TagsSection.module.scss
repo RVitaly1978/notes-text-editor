@@ -1,7 +1,17 @@
 @import '../../styles/abstract/abstracts';
 
 .container {
-  width: 25%;
+  width: 30%;
   margin-right: 0.5rem;
   flex-shrink: 0;
+
+  @include media-landscape {
+    margin: 0 auto 4rem;
+    min-width: calc(#{$content-width-mobile} - 2 * 2rem);
+  }
+
+  @include media-mobile {
+    width: 100%;
+    min-width: unset;
+  }
 }

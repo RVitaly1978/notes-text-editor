@@ -5,12 +5,16 @@
 
   width: 100%;
   min-height: $header-hight;
-  padding: 0.5rem 2rem;
+  padding: 1rem 2rem;
 
   @include flex($justify-content: space-between);
   @extend %animation-fadeIn;
 
   user-select: none;
+
+  @include media-surface {
+    flex-direction: column;
+  }
 }
 
 .logo {
@@ -19,6 +23,10 @@
 
   color: $active-color;
   text-shadow: $text-shadow;
+
+  @include media-surface {
+    margin-bottom: 2rem;
+  }
 }
 
 .buttonsGroup {
